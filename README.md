@@ -1,4 +1,4 @@
-# Spider-Sense Recommender
+# Spiderman-Comics Recommender
 
 A hybrid recommendation system for Spider-Man movies, games, comics, animated films, and shows.
 
