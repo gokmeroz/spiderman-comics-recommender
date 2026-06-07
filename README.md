@@ -31,3 +31,7 @@ pip install -r requirements.txt
 ```bash
 pytest
 ```
+
+## Version 1: Content-based recommender
+
+The user enters a text query describing their taste. The system converts both the query and all item metadata into TF-IDF vectors, then ranks items by cosine similarity to the query vector. This works for brand-new users with no history — it only needs the item catalog.
