@@ -1,40 +1,100 @@
 """
-user_profile.py
+user_profile.py  —  Version 2: Personalized recommendation via user profile vectors
 
-Implements a personalized recommender using a user profile vector.
+─────────────────────────────────────────────────────────────────────────────
+THE PROBLEM WITH VERSION 1
+─────────────────────────────────────────────────────────────────────────────
+In Version 1, the user typed a query like "dark venom symbiote game".
+That worked, but it had two problems:
 
-What changes compared to Version 1?
-  Version 1 only knew about a text query like "dark venom symbiote".
-  Version 2 knows about specific items the user has already seen and liked or disliked.
+  1. The user had to know what words to type.
+  2. The query was the same every time, even if the user's taste is complex.
 
-  Instead of representing the user's taste as a query string, we now represent
-  it as a VECTOR — the same kind of vector we use to represent items.
+Version 2 solves this by learning the user's taste FROM their history,
+not from their words.
 
-What is a user profile vector?
-  We take the TF-IDF vectors of items the user liked and average them.
-  The resulting vector points in the direction of the user's taste in the
-  TF-IDF vector space.
+─────────────────────────────────────────────────────────────────────────────
+THE CORE IDEA: REPRESENT THE USER AS A VECTOR
+─────────────────────────────────────────────────────────────────────────────
+Every item in our catalog already has a TF-IDF vector — a list of numbers
+that encodes its content (tone, villain, tags, etc.).
 
-  If the user also has disliked items, we subtract their average vector.
-  This "pushes" the user profile away from unwanted regions of the space.
+The key insight of Version 2:
 
-  Example:
-    liked  = ["Spider-Man 2", "Spider-Man: Into the Spider-Verse"]
-    disliked = ["Spider-Man: Web of Shadows"]
+  The user's TASTE can be encoded as a vector in the same space.
 
-    user_vector = mean(liked item vectors) - mean(disliked item vectors)
+How? We average the TF-IDF vectors of items the user liked.
 
-  We then rank all unseen items by cosine similarity to this user vector.
+  liked_vector = mean of [vector("Spider-Man 2"), vector("Spider-Verse")]
 
-Why is this still content-based?
-  We are still using item METADATA vectors (TF-IDF from tags, tone, villain etc.)
-  to represent the user's taste. We are not yet looking at what other users did.
-  That comes in Version 3 (collaborative filtering).
+This average vector points toward the region of the vector space that
+the user tends to enjoy — emotional movies, Peter Parker, sacrifice, etc.
 
-Why is this more personalized than Version 1?
-  Version 1 required the user to manually write a query.
-  Version 2 derives the user's taste automatically from their history.
-  The user just says "I liked these, I disliked those" — the math does the rest.
+─────────────────────────────────────────────────────────────────────────────
+WHAT DOES "AVERAGE THE VECTORS" ACTUALLY MEAN?
+─────────────────────────────────────────────────────────────────────────────
+Think of TF-IDF vectors as lists of word weights. Each position represents
+one word in the vocabulary:
+
+  ["dark", "emotional", "symbiote", "multiverse", "teen", ...]
+
+  Spider-Man 2 vector:     [0.0,  0.4,  0.0,  0.0,  0.1, ...]
+  Spider-Verse vector:     [0.0,  0.5,  0.0,  0.6,  0.3, ...]
+                           ─────────────────────────────────────
+  Average (liked_vector):  [0.0,  0.45, 0.0,  0.3,  0.2, ...]
+
+The result is a new vector that carries the combined "fingerprint" of what
+the user likes. Words shared by many liked items get high weights. Words
+that appear in only one item get diluted.
+
+─────────────────────────────────────────────────────────────────────────────
+HOW DISLIKED ITEMS WORK: VECTOR SUBTRACTION
+─────────────────────────────────────────────────────────────────────────────
+If the user dislikes certain items, we compute their average vector and
+SUBTRACT it from the liked vector:
+
+  user_vector = liked_vector - disliked_vector
+
+Subtraction in vector space means: "move away from the direction of things
+I don't like." If the user dislikes "Web of Shadows" (dark, symbiote, venom),
+the word "symbiote" gets a lower weight in the final user vector — so dark
+symbiote items score worse in the ranking.
+
+Concretely:
+
+  liked_titles   = ["Spider-Man 2", "Spider-Man: Into the Spider-Verse"]
+  disliked_titles = ["Spider-Man: Web of Shadows"]
+
+  user_vector = mean(liked vectors) - mean(disliked vectors)
+
+─────────────────────────────────────────────────────────────────────────────
+HOW WE USE THE USER VECTOR TO RECOMMEND
+─────────────────────────────────────────────────────────────────────────────
+Once we have user_vector, we compute cosine similarity between it and
+every item's TF-IDF vector. Items whose direction is closest to the user's
+taste vector score highest. We then exclude items the user already rated
+and return the top K remaining items.
+
+─────────────────────────────────────────────────────────────────────────────
+WHY IS THIS STILL CONTENT-BASED?
+─────────────────────────────────────────────────────────────────────────────
+Because the user vector is built entirely from item METADATA (tags, tone,
+villain, etc.) — the same TF-IDF vectors we use to describe items.
+
+We are NOT using other users' behavior yet. That comes in Version 3
+(collaborative filtering), where we ask: "what did similar users like?"
+
+─────────────────────────────────────────────────────────────────────────────
+WHY IS THIS MORE PERSONALIZED THAN VERSION 1?
+─────────────────────────────────────────────────────────────────────────────
+Version 1: User writes a query. The query IS the taste signal.
+Version 2: User provides examples. The math DERIVES the taste signal.
+
+This is more powerful because:
+  - The user doesn't need to know what words describe their own taste.
+  - Liked items contribute many features simultaneously (tone AND villain
+    AND era AND tags), not just the words the user happened to type.
+  - Negative examples actively steer recommendations away from bad regions.
 """
 
 import numpy as np
