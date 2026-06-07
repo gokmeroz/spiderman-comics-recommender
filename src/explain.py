@@ -59,3 +59,39 @@ def explain_content_match(query: str, item_row: pd.Series) -> str:
         # Fallback when no specific keywords match — the TF-IDF still found
         # a similarity, but it may be based on subtle word overlap.
         return f"Recommended based on overall similarity to your query."
+
+
+def explain_profile_match(item_row: pd.Series) -> str:
+    """
+    Generate a short explanation for a user-profile-based recommendation.
+
+    Instead of matching a query, we now know the item was surfaced because its
+    vector is close to the user's averaged preference vector. We report the most
+    descriptive traits of the item so the user understands why it appeared.
+
+    Args:
+        item_row: One row from the items DataFrame.
+
+    Returns:
+        A short explanation string.
+    """
+    tone = str(item_row.get("tone", "")).strip()
+    villain = str(item_row.get("villain", "")).strip()
+    theme = str(item_row.get("theme", "")).strip()
+    medium = str(item_row.get("medium", "")).strip()
+
+    traits = []
+
+    if tone and tone.lower() not in ("nan", ""):
+        traits.append(f"{tone} tone")
+    if villain and villain.lower() not in ("nan", "", "multiple"):
+        traits.append(f"{villain}")
+    if theme and theme.lower() not in ("nan", ""):
+        traits.append(f"{theme} theme")
+    if medium and medium.lower() not in ("nan", ""):
+        traits.append(f"{medium}")
+
+    if traits:
+        joined = ", ".join(traits[:3])
+        return f"Matches your taste profile: {joined}."
+    return "Recommended based on similarity to your liked items."

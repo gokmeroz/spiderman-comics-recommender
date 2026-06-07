@@ -16,9 +16,9 @@ Why is this useful?
   can get recommendations by describing what they want in natural language.
 
 What is TF-IDF?
-  TF-IDF stands for Term Frequency–Inverse Document Frequency.
-  - TF (Term Frequency): how often a word appears in one item's text.
-  - IDF (Inverse Document Frequency): how rare that word is across all items.
+  TF-IDF stands for Term Frequency Inverse Document Frequency.
+  - TF (Term Frequency): how often a word appears in one item's text. eg., "venom" might appear 3 times in one item's metadata, so TF=3 for that word.
+  - IDF (Inverse Document Frequency): how rare that word is across all items. eg., if "venom" appears in 10 out of 100 items, then IDF = log(100/10) = 1.0. If "the" appears in all 100 items, then IDF = log(100/100) = 0.
   A high TF-IDF score means the word is important for THIS item but not
   too common everywhere — so it's actually distinctive and useful.
 
