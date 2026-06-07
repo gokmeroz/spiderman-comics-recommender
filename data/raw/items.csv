@@ -1,0 +1,31 @@
+item_id,title,medium,era,tone,villain,theme,tags,popularity
+1,Spider-Man: Into the Spider-Verse,animated_film,modern,emotional,Kingpin,multiverse,"animation miles morales multiverse family identity coming-of-age leap of faith",96
+2,Spider-Man: Across the Spider-Verse,animated_film,modern,emotional,Spot,multiverse,"miles morales gwen stacy multiverse canon events identity animation",94
+3,Spider-Man 2,movie,raimi,emotional,Doctor Octopus,responsibility,"peter parker sacrifice mentor science tragedy responsibility train scene",93
+4,Spider-Man,movie,raimi,classic,Green Goblin,origin,"peter parker origin uncle ben responsibility goblin mary jane",90
+5,Spider-Man 3,movie,raimi,chaotic,Venom,ego,"black suit venom sandman forgiveness revenge emo peter",72
+6,The Amazing Spider-Man,movie,webb,romantic,Lizard,origin,"gwen stacy peter parker science lonely skateboard origin",76
+7,The Amazing Spider-Man 2,movie,webb,tragic,Electro,loss,"gwen stacy electro green goblin tragedy romance sacrifice",70
+8,Spider-Man: Homecoming,movie,mcu,funny,Vulture,coming-of-age,"teen peter parker high school iron man vulture friendly neighborhood",86
+9,Spider-Man: Far From Home,movie,mcu,adventure,Mysterio,illusion,"mysterio europe grief tony stark illusion responsibility",82
+10,Spider-Man: No Way Home,movie,mcu,nostalgic,Green Goblin,multiverse,"multiverse tobey andrew nostalgia sacrifice villains redemption",95
+11,Spider-Man PS4,game,modern,cinematic,Mister Negative,responsibility,"open world peter parker aunt may mature story swinging combat",91
+12,Spider-Man: Miles Morales,game,modern,hopeful,Rhino,identity,"miles morales harlem family music electricity identity winter",88
+13,Spider-Man 2 PS5,game,modern,dark,Venom,symbiote,"venom kraven black suit peter miles symbiote open world",90
+14,Spider-Man: Web of Shadows,game,2000s,dark,Venom,symbiote,"black suit venom infection choices dark action symbiote invasion",80
+15,Ultimate Spider-Man,game,2000s,comic-like,Venom,dual-perspective,"venom eddie brock comic style peter parker playable villain",78
+16,Spider-Man: Shattered Dimensions,game,2000s,adventure,Mysterio,multiverse,"noir 2099 ultimate amazing dimensions multiple spider-men",77
+17,Spider-Man 2099,comic,future,dark,Alchemax,dystopia,"miguel ohara cyberpunk future genetics corporation antihero",82
+18,Kraven's Last Hunt,comic,classic,dark,Kraven,identity,"psychological dark burial obsession survival kraven peter parker",89
+19,Ultimate Spider-Man Comic,comic,2000s,modern,Green Goblin,origin,"brian michael bendis teen peter parker modern origin high school",84
+20,Spider-Man: Life Story,comic,modern,reflective,Multiple,aging,"decades aging peter parker responsibility life choices emotional",87
+21,Superior Spider-Man,comic,modern,complex,Doctor Octopus,identity,"doctor octopus becomes spider-man antihero morality intelligence",83
+22,Spider-Man Blue,comic,classic,romantic,Green Goblin,grief,"gwen stacy mary jane memory love loss emotional reflective",81
+23,Venom,comic,modern,dark,Venom,symbiote,"eddie brock symbiote antihero dark alien bond",79
+24,The Spectacular Spider-Man,animated_show,2000s,balanced,Green Goblin,teen-life,"school peter parker villains romance action serialized animation",85
+25,Spider-Man The Animated Series,animated_show,classic,adventure,Multiple,heroism,"90s cartoon venom carnage kingpin madame web classic villains",80
+26,Spider-Man Unlimited,animated_show,classic,weird,High Evolutionary,alternate-world,"counter earth futuristic strange alternate dimension",61
+27,Spider-Man Noir,comic,classic,dark,Goblin,detective,"noir detective depression 1930s gritty dark vigilante",76
+28,Spider-Gwen,comic,modern,stylish,Kingpin,identity,"gwen stacy alternate universe music drums identity punk",82
+29,Marvel's Midnight Suns Spider-Man,game,modern,tactical,Venom,teamwork,"tactical rpg magic team heroes venom combat cards",69
+30,Spider-Man Friend or Foe,game,2000s,light,Multiple,team-up,"co-op villains allies light funny arcade action",65
