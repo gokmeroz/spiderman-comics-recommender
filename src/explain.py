@@ -95,3 +95,24 @@ def explain_profile_match(item_row: pd.Series) -> str:
         joined = ", ".join(traits[:3])
         return f"Matches your taste profile: {joined}."
     return "Recommended based on similarity to your liked items."
+
+
+def explain_collaborative_match(item_row: pd.Series, similar_users: list[str]) -> str:
+    """
+    Generate a short explanation for a collaborative filtering recommendation.
+
+    Unlike content-based explanations, we don't explain WHAT the item is about.
+    We explain WHO liked it — because that's how collaborative filtering works.
+    The item was surfaced because people with similar taste to the user enjoyed it.
+
+    Args:
+        item_row: One row from the items DataFrame.
+        similar_users: List of user IDs whose ratings contributed to this recommendation.
+
+    Returns:
+        A short explanation string.
+    """
+    if similar_users:
+        users_str = ", ".join(similar_users[:3])
+        return f"Liked by users with similar taste to you ({users_str})."
+    return "Recommended based on similar users' ratings."

@@ -39,3 +39,7 @@ The user enters a text query describing their taste. The system converts both th
 ## Version 2: User profile recommender
 
 Instead of typing a query, the user provides liked and disliked titles. The system builds a user profile vector by averaging the TF-IDF vectors of liked items, then subtracting the average of disliked item vectors. Items are ranked by cosine similarity to this profile vector. Already-rated items are excluded from results.
+
+## Version 3: Collaborative filtering
+
+The system now uses synthetic user ratings from `interactions.csv`. It builds a user-item matrix, computes cosine similarity between users, and recommends items liked by the most similar users. This can surface non-obvious recommendations without ever reading item tags — but it breaks for brand-new users with no ratings (the cold-start problem).
