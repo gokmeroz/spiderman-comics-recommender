@@ -32,6 +32,10 @@ def explain_content_match(query: str, item_row: pd.Series) -> str:
     Returns:
         A short explanation string like:
         "Recommended because it matches your interest in: dark, venom, symbiote."
+    Example:
+        If the query is "dark venom symbiote" and the item has tone="dark", villain="Venom", theme="symbiote", 
+        then the explanation would be:
+        "Recommended because it matches your interest in: dark, venom, symbiote."
     """
     # Normalize the query to lowercase for case-insensitive matching.
     query_words = set(query.lower().split())
@@ -116,3 +120,45 @@ def explain_collaborative_match(item_row: pd.Series, similar_users: list[str]) -
         users_str = ", ".join(similar_users[:3])
         return f"Liked by users with similar taste to you ({users_str})."
     return "Recommended based on similar users' ratings."
+
+
+def explain_hybrid_match(
+    content_score: float,
+    collaborative_score: float,
+    popularity_score: float,
+) -> str:
+    """
+    Generate a short explanation for a hybrid recommendation.
+
+    Reports which signals were strongest so the user understands
+    why this item ranked highly in the combined score.
+
+    Args:
+        content_score: Normalized content/profile similarity (0–1).
+        collaborative_score: Normalized collaborative score (0–1).
+        popularity_score: Normalized popularity (0–1).
+
+    Returns:
+        A short explanation string naming the dominant signals.
+    """
+    signals = []
+
+    if content_score > 0.3:
+        signals.append("strong content match")
+    elif content_score > 0.05:
+        signals.append("content match")
+
+    if collaborative_score > 0.3:
+        signals.append("highly rated by similar users")
+    elif collaborative_score > 0.05:
+        signals.append("liked by similar users")
+
+    if popularity_score > 0.85:
+        signals.append("very popular")
+    elif popularity_score > 0.7 and not signals:
+        # Only mention popularity as the lead signal when nothing else is strong.
+        signals.append("popular title")
+
+    if signals:
+        return "Recommended based on: " + ", ".join(signals) + "."
+    return "Recommended by hybrid ranking."
