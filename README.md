@@ -47,3 +47,7 @@ The system now uses synthetic user ratings from `interactions.csv`. It builds a 
 ## Version 4: Hybrid recommender
 
 Combines all three signals into one ranked list using a weighted formula: `final_score = 0.60 * content_score + 0.30 * collaborative_score + 0.10 * popularity_score`. All scores are normalized to 0–1 before combining. Supports three modes: query-only cold start, liked/disliked profile, and known synthetic user.
+
+## Version 5: Evaluation
+
+Adds three offline ranking metrics — Precision@K, Recall@K, and NDCG@K. Precision@K measures how many of the top K results were relevant. Recall@K measures how many relevant items were recovered. NDCG@K measures whether relevant items were ranked near the top. Includes built-in test cases for evaluating the hybrid recommender.
