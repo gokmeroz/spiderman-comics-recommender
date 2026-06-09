@@ -28,9 +28,9 @@ A hybrid system combines all three signals so that:
 ─────────────────────────────────────────────────────────────────────────────
 THE SCORING FORMULA
 ─────────────────────────────────────────────────────────────────────────────
-final_score = 0.60 * content_score
-            + 0.30 * collaborative_score
-            + 0.10 * popularity_score
+final_score = 0.60 * content_score, represent the relevance to the user's query or profile
+            + 0.30 * collaborative_score, represent the influence of similar users' ratings
+            + 0.10 * popularity_score, represent the general popularity of the item
 
 Weights must sum to 1.0. These specific values are a design choice, not a
 mathematical truth. In a real product, you'd tune them on held-out data or

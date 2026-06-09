@@ -105,7 +105,7 @@ This should be suitable to discuss in a New Grad AI Engineering interview.
 The final interview story should be:
 
 ```text
-Spider-Sense Recommender is a hybrid recommendation system for Spider-Man media. I started with a content-based TF-IDF baseline, then added user profile vectors, synthetic collaborative filtering, and a hybrid ranker that combines content similarity, collaborative behavior, and popularity. I evaluated the recommender using Precision@K, Recall@K, and NDCG@K, and added human-readable explanations for why each recommendation was returned.
+SpiderMan Comics Recommender is a hybrid recommendation system for Spider-Man media. I started with a content-based TF-IDF baseline, then added user profile vectors, synthetic collaborative filtering, and a hybrid ranker that combines content similarity, collaborative behavior, and popularity. I evaluated the recommender using Precision@K, Recall@K, and NDCG@K, and added human-readable explanations for why each recommendation was returned.
 ```
 
 ---

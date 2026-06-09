@@ -13,7 +13,7 @@ Accuracy would treat "recommended in position 1" and "recommended in position
   2. Did the relevant items appear near the TOP?       → NDCG@K
 
 ─────────────────────────────────────────────────────────────────────────────
-PRECISION@K
+PRECISION@K, HOW MANY OF THE TOP K WERE RELEVANT?
 ─────────────────────────────────────────────────────────────────────────────
 "Of the top K recommendations, what fraction were relevant?"
 
@@ -25,7 +25,7 @@ Example:
   → 3 hits out of 5 → Precision@5 = 0.60
 
 ─────────────────────────────────────────────────────────────────────────────
-RECALL@K
+RECALL@K, DID WE FIND ALL THE RELEVANT ITEMS IN THE TOP K?
 ─────────────────────────────────────────────────────────────────────────────
 "Of all relevant items in the catalog, what fraction did we find in top K?"
 
@@ -37,9 +37,9 @@ Example (same as above):
 Note: Precision and Recall trade off against each other. A recommender that
 returns ALL items gets Recall = 1.0 but terrible Precision.
 
-─────────────────────────────────────────────────────────────────────────────
-NDCG@K (Normalized Discounted Cumulative Gain)
-─────────────────────────────────────────────────────────────────────────────
+─────────────────────────────────────────────────────────────────────────────────────────────
+NDCG@K (Normalized Discounted Cumulative Gain), DID WE RANK THE RELEVANT ITEMS NEAR THE TOP?
+─────────────────────────────────────────────────────────────────────────────────────────────
 "Did we rank the relevant items near the TOP of the list?"
 
 Precision@K and Recall@K don't care about ORDER within the top K. NDCG does.

@@ -33,6 +33,7 @@ The core data structure is a 2D matrix:
   user_A    5       0       3
   user_B    0       4       0
   user_C    2       4       5
+  PS: 0 means "not rated". Ratings are between 1 and 5. This is a sparse matrix — most users have rated only a few items.
 
   - Rows = users
   - Columns = items
@@ -44,6 +45,14 @@ Missing values are filled with 0 because:
   - 0 is a neutral placeholder that doesn't push similarity up or down
   - In practice, sparse matrix techniques handle this more elegantly,
     but 0-filling is the clearest way to learn the concept
+
+The similarity between two users is computed by treating their rows as vectors and
+computing cosine similarity. Users with similar rating patterns will have a high cosine similarity score.
+
+E.g., if user_A and user_B both rated the same items similarly, 
+their vectors will point in a similar direction, 
+resulting in a high cosine similarity score close to 1. 
+If they have very different rating patterns, the cosine similarity will be closer to 0.
 
 ─────────────────────────────────────────────────────────────────────────────
 USER-USER SIMILARITY
